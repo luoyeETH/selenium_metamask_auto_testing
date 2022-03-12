@@ -1,18 +1,23 @@
 import selenium_metamask_automation as auto
 import time
+import wallet
+
 
 # 指定chromedriver路径
 driverPath = '/Users/luoye/Downloads/tools/chromedriver'
 driver = auto.launchSeleniumWebdriver(driverPath)
 # 打开Uniswap
 driver.get('https://app.uniswap.org/#/swap')
-seed_phrase = 'sign noodle smooth title mountain squeeze asthma tiger canal refuse sphere half below escape manual hub hockey lawn glance strike rapid pelican logic puppy'
+# 助记词明文导入(不建议)
+# seed_phrase = 'sign noodle smooth title mountain squeeze asthma tiger canal refuse sphere half below escape manual hub hockey lawn glance strike rapid pelican logic puppy'
+address = '0xfd10b2f7a0cc10065f8e5f0e54eb288134fde7af'
+seed_phrase = wallet.getSeedPhrase(address)
 password = 'TestPassword'
 # 导入助记词
 auto.metamaskSetup(seed_phrase, password)
-neteworkName = 'Kovan 测试网络'
+networkName = 'Kovan 测试网络'
 # 切换到测试网络
-auto.changeMetamaskNetwork(neteworkName)
+auto.changeMetamaskNetwork(networkName)
 driver.switch_to.window(driver.window_handles[0])
 time.sleep(5)
 driver.find_element_by_xpath('//*[@id="connect-wallet"]').click()
