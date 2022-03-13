@@ -1,5 +1,7 @@
 from openpyxl import *
 
+# filename = '20220312_eth_uniswap_10.xlsx'
+
 
 class Excel:
 
@@ -13,16 +15,29 @@ class Excel:
     def getColValues(self, column):
         rows = self.ws.max_row
         column_data = []
-        for i in range(1, rows+1):
+        for i in range(1, rows + 1):
             cell_value = self.ws.cell(row=i, column=column).value
             column_data.append(cell_value)
         return column_data
 
 
-def getSeedPhrase(address):
+def getAddress(filename):
+    if len(filename) == 0:
+        print('未指定地址文件')
+        return
+    # 用户地址路径，以xlsx格式保存
+    file = '/Users/luoye/Downloads/TestNetwork/' + filename
+    address_list = Excel(file).getColValues(1)
+    return address_list
+
+
+def getSeedPhrase(filename, address):
     input_address = address
-    # 用户助记词路径，以xlsx格式保存
-    file = '/Users/luoye/Downloads/TestNetwork/20220312_eth_uniswap_10.xlsx'
+    if len(filename) == 0:
+        print('未指定地址文件')
+        return
+    # 用户助记词路径，以xlsx格式保存，该路径由用户自行修改
+    file = '/Users/luoye/Downloads/TestNetwork/' + filename
     address_list = Excel(file).getColValues(1)
     mnemonic_list = Excel(file).getColValues(3)
 
