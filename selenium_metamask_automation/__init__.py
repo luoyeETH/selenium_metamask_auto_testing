@@ -119,6 +119,22 @@ def changeMetamaskNetwork(networkName):
     time.sleep(3)
 
 
+def addAndChangeNetwork():
+    time.sleep(3)
+    print("添加并切换网络开始")
+    driver.execute_script("window.open();")
+    driver.switch_to.window(driver.window_handles[1])
+    driver.get('chrome-extension://{}/home.html'.format(EXTENSION_ID))
+    time.sleep(5)
+    driver.find_element_by_xpath("//button[text()='批准']").click()
+    time.sleep(3)
+    driver.find_element_by_xpath("//button[text()='切换网络']").click()
+    time.sleep(8)
+    driver.close()
+    driver.switch_to.window(driver.window_handles[0])
+    time.sleep(3)
+
+
 def connectToWebsite():
     time.sleep(3)
 
@@ -255,12 +271,14 @@ def signConfirm():
     time.sleep(5)
     driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
     time.sleep(3)
-    driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[3]/button[2]').click()
+    driver.find_element_by_xpath('//*[@id="app-content"]/div/div[2]/div/div[3]/div[1]').click()
+    driver.find_element_by_xpath('//button[text()="签名"]').click()
     time.sleep(1)
     # driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[2]/div[2]/div[2]/footer/button[2]').click()
     # time.sleep(3)
     print('Sign confirmed')
     print(driver.window_handles)
+    driver.close()
     driver.switch_to.window(driver.window_handles[0])
     time.sleep(3)
 
