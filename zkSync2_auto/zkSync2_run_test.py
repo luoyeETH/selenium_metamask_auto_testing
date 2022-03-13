@@ -72,13 +72,20 @@ def runTest(addr):
     driver.find_element_by_xpath("//button[text()='Back to Balances']").click()
     # 退出
     time.sleep(10)
-    driver.get_screenshot_as_file('/Users/luoye/Downloads/TestNetwork/zkSync2' + address + '.png')
-    print(address + " run test success")
+    driver.get_screenshot_as_file('/Users/luoye/Downloads/TestNetwork/zkSync2/' + address + '.png')
     driver.quit()
 
 
 filename = '20220313_eth_zkSync2_50.xlsx'
 address_list = wallet.getAddress(filename)
-for i in range(10, 11):
+result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/result.txt', mode='a', encoding='utf-8')
+for i in range(1, 51):
     address = address_list[i]
-    runTest(address)
+    try:
+        runTest(address)
+    except Exception as e:
+        print(e)
+        print(address + " run test failed", file=result)
+        continue
+    else:
+        print(address + " run test success", file=result)
