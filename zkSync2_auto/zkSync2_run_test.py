@@ -85,7 +85,9 @@ for i in range(1, 51):
         runTest(address)
     except Exception as e:
         print(e)
+        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行失败")
         print(address + " run test failed", file=result)
         continue
     else:
+        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行成功")
         print(address + " run test success", file=result)
