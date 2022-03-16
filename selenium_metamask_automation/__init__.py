@@ -49,11 +49,11 @@ def metamaskSetup(recoveryPhrase, password):
     driver.find_element_by_xpath('//button[text()="全部完成"]').click()
     time.sleep(2)
 
-    # closing the message popup after all done metamask screen
-    driver.find_element_by_xpath('//*[@id="popover-content"]/div/div/section/header/div/button').click()
-    time.sleep(2)
+    # # closing the message popup after all done metamask screen
+    # driver.find_element_by_xpath('//*[@id="popover-content"]/div/div/section/header/div/button').click()
+    # time.sleep(2)
     print("Wallet has been imported successfully")
-    time.sleep(1)
+    # time.sleep(1)
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
 
