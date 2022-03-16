@@ -163,7 +163,7 @@ def runMuteSwitchTestnet(addr):
 
 filename = '20220313_eth_zkSync2_50.xlsx'
 address_list = wallet.getAddress(filename)
-# result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/result.txt', mode='a', encoding='utf-8')
+result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/result.txt', mode='a', encoding='utf-8')
 for i in range(1, 51):
     address = address_list[i]
     try:
