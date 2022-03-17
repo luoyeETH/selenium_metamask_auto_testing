@@ -4,7 +4,7 @@ import wallet
 import random
 
 
-def runTest(addr):
+def runTest(filename, addr):
     # 指定chromedriver路径
     driver_path = '/Users/luoye/Downloads/tools/chromedriver'
     driver = auto.launchSeleniumWebdriver(driver_path)
@@ -76,18 +76,18 @@ def runTest(addr):
     driver.quit()
 
 
-filename = '20220313_eth_zkSync2_50.xlsx'
-address_list = wallet.getAddress(filename)
-result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/result.txt', mode='a', encoding='utf-8')
-for i in range(1, 51):
-    address = address_list[i]
-    try:
-        runTest(address)
-    except Exception as e:
-        print(e)
-        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行失败")
-        print(address + " run test failed", file=result)
-        continue
-    else:
-        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行成功")
-        print(address + " run test success", file=result)
+# filename = '20220313_eth_zkSync2_50.xlsx'
+# address_list = wallet.getAddress(filename)
+# result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/result.txt', mode='a', encoding='utf-8')
+# for i in range(1, 51):
+#     address = address_list[i]
+#     try:
+#         runTest(filename, address)
+#     except Exception as e:
+#         print(e)
+#         print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行失败")
+#         print(address + " run test failed", file=result)
+#         continue
+#     else:
+#         print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行成功")
+#         print(address + " run test success", file=result)

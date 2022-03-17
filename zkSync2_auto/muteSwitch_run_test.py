@@ -5,7 +5,7 @@ import random
 from selenium.common.exceptions import NoSuchElementException
 
 
-def runMuteSwitchTestnet(addr):
+def runMuteSwitchTestnet(filename, addr):
     # 指定chromedriver路径
     driver_path = '/Users/luoye/Downloads/tools/chromedriver'
     driver = auto.launchSeleniumWebdriver(driver_path)
@@ -53,7 +53,7 @@ def runMuteSwitchTestnet(addr):
         driver.find_element_by_xpath("//p[text()='" + token_y + "']").click()
         time.sleep(3)
         inputs = driver.find_elements_by_xpath('//input')
-        value = random.randint(10, 30)
+        value = random.randint(20, 30)
         inputs[0].send_keys(value)
         time.sleep(10)
         while True:
@@ -98,7 +98,7 @@ def runMuteSwitchTestnet(addr):
         driver.find_element_by_xpath("//p[text()='" + token_y + "']").click()
         time.sleep(3)
         inputs = driver.find_elements_by_xpath('//input')
-        value = random.randint(10, 30)
+        value = random.randint(10, 20)
         inputs[0].send_keys(value)
         time.sleep(10)
         driver.find_element_by_xpath('//button[text()="Supply"]').click()
@@ -163,19 +163,19 @@ def runMuteSwitchTestnet(addr):
     driver.quit()
 
 
-filename = '20220313_eth_zkSync2_50.xlsx'
-address_list = wallet.getAddress(filename)
-result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/result.txt', mode='a', encoding='utf-8')
-for i in range(1, 51):
-    address = address_list[i]
-    try:
-        runMuteSwitchTestnet(address)
-    except Exception as e:
-        print(e)
-        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行失败")
-        print(address + " run test failed", file=result)
-        continue
-    else:
-        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行成功")
-        print(address + " run test success", file=result)
+# filename = '20220313_eth_zkSync2_50.xlsx'
+# address_list = wallet.getAddress(filename)
+# result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/result.txt', mode='a', encoding='utf-8')
+# for i in range(1, 51):
+#     address = address_list[i]
+#     try:
+#         runMuteSwitchTestnet(filename, address)
+#     except Exception as e:
+#         print(e)
+#         print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行失败")
+#         print(address + " run test failed", file=result)
+#         continue
+#     else:
+#         print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 第" + str(i) + "次执行成功")
+#         print(address + " run test success", file=result)
 
