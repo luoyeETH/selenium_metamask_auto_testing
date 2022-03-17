@@ -105,7 +105,6 @@ def runMuteSwitchTestnet(addr):
         time.sleep(3)
         auto.signConfirm()
         time.sleep(15)
-        time.sleep(3)
         auto.signConfirm()
         closePopup()
         print('run add LP success')
@@ -137,22 +136,24 @@ def runMuteSwitchTestnet(addr):
                 time.sleep(3)
                 auto.signConfirm()
                 time.sleep(3)
+                auto.signConfirm()
+                time.sleep(3)
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()
                 time.sleep(3)
                 driver.get_screenshot_as_file(
-                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch' + address + '.png')
+                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/' + address + '.png')
                 break
 
     init()
-    # token_list_a = ['DAI', 'USD Coin', 'Chainlink']
-    # token_list_b = ['Ethereum', 'Wrapped Bitcoin']
-    # token_a = random.choice(token_list_a)
-    # token_b = random.choice(token_list_b)
-    token_a = 'DAI'
-    token_b = 'ETH'
+    token_list_a = ['DAI', 'USD Coin', 'Chainlink']
+    token_list_b = ['Ethereum', 'Wrapped Bitcoin']
+    token_a = random.choice(token_list_a)
+    token_b = random.choice(token_list_b)
+    dai = 'DAI'
+    eth = 'ETH'
     swap(token_a, token_b)
     time.sleep(3)
-    addLP(token_a, token_b)
+    addLP(dai, eth)
     # dai = 'DAI'
     # eth = 'Ethereum'
     # time.sleep(3)
