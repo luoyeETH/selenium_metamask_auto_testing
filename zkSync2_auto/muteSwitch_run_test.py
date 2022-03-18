@@ -129,6 +129,8 @@ def runMuteSwitchTestnet(filename, addr):
                 print("Approve")
                 driver.find_element_by_xpath("//button[text()='Approve']").click()
                 auto.signConfirm()
+                time.sleep(5)
+                driver.refresh()
                 time.sleep(10)
                 driver.find_element_by_xpath('//button[text()="MAX"]').click()
                 time.sleep(5)
@@ -141,7 +143,7 @@ def runMuteSwitchTestnet(filename, addr):
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()
                 time.sleep(3)
                 driver.get_screenshot_as_file(
-                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/' + address + '.png')
+                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/' + addr + '.png')
                 break
 
     init()
