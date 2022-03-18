@@ -32,7 +32,7 @@ def runMuteSwitchTestnet(filename, addr):
             try:
                 element = driver.find_element_by_xpath("//*[@alt='Close']")
             except NoSuchElementException:
-                time.sleep(20)
+                time.sleep(25)
                 driver.find_element_by_xpath("//*[@alt='Close']").click()
                 break
             else:
@@ -129,9 +129,13 @@ def runMuteSwitchTestnet(filename, addr):
                 print("Approve")
                 driver.find_element_by_xpath("//button[text()='Approve']").click()
                 auto.signConfirm()
-                time.sleep(20)
-                driver.find_element_by_xpath('//button[text()="MAX"]').click()
                 time.sleep(5)
+                driver.refresh()
+                time.sleep(5)
+                driver.find_element_by_xpath('//*[@id="app"]/main/div/div[3]/div/div/div[1]').click()
+                time.sleep(5)
+                driver.find_element_by_xpath('//button[text()="MAX"]').click()
+                time.sleep(10)
                 driver.find_element_by_xpath('//button[text()="Deposit"]').click()
                 time.sleep(3)
                 auto.signConfirm()

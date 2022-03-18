@@ -259,6 +259,7 @@ def addToken(tokenAddress):
     driver.switch_to.window(driver.window_handles[0])
     time.sleep(3)
 
+
 def signConfirm():
     print("sign")
     time.sleep(3)
@@ -269,12 +270,18 @@ def signConfirm():
     driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
     time.sleep(5)
     driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
-    time.sleep(3)
-    driver.find_element_by_xpath('//*[@id="app-content"]/div/div[2]/div/div[3]/div[1]').click()
-    driver.find_element_by_xpath('//button[text()="签名"]').click()
-    time.sleep(1)
-    # driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[2]/div[2]/div[2]/footer/button[2]').click()
-    # time.sleep(3)
+    time.sleep(5)
+    while True:
+        try:
+            element = driver.find_element_by_xpath('//*[@id="app-content"]/div/div[2]/div/div[3]/div[1]')
+        except NoSuchElementException:
+            time.sleep(1)
+            break
+        else:
+            driver.find_element_by_xpath('//*[@id="app-content"]/div/div[2]/div/div[3]/div[1]').click()
+            driver.find_element_by_xpath('//button[text()="签名"]').click()
+            time.sleep(1)
+            break
     print('Sign confirmed')
     driver.close()
     driver.switch_to.window(driver.window_handles[0])

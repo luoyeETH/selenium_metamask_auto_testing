@@ -6,7 +6,7 @@ import muteSwitch_run_test as muteSwitch
 filename = '20220317_eth_zkSync_muteSwitch_100.xlsx'
 address_list = wallet.getAddress(filename)
 result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/full/result.txt', mode='a', encoding='utf-8')
-for i in range(5, 101):
+for i in range(1, 101):
     address = address_list[i]
     try:
         zkSync.runTest(filename, address)
