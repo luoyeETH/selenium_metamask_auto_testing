@@ -45,3 +45,16 @@ def getSeedPhrase(filename, address):
         if input_address == address_list[i]:
             num = i
             return mnemonic_list[num]
+
+
+def getSeedPhrase(filepath):
+    # 用户助记词路径，以xlsx格式保存，该路径由用户提供
+    # example:'/Users/luoye/Downloads/TestNetwork/20220317_eth_zkSync_muteSwitch_100.xlsx'
+    file = filepath
+    address_list = Excel(file).getColValues(1)
+    mnemonic_list = Excel(file).getColValues(3)
+    wallet = [address_list, mnemonic_list]
+    return wallet
+
+
+
