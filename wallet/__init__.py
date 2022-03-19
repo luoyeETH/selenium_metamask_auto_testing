@@ -47,7 +47,7 @@ def getSeedPhrase(filename, address):
             return mnemonic_list[num]
 
 
-def getSeedPhrase(filepath):
+def getSeedPhraseV2(filepath):
     # 用户助记词路径，以xlsx格式保存，该路径由用户提供
     # example:'/Users/luoye/Downloads/TestNetwork/20220317_eth_zkSync_muteSwitch_100.xlsx'
     file = filepath
