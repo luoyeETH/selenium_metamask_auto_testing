@@ -28,15 +28,15 @@ def runTest(filename, addr):
 
     # Faucet
     time.sleep(5)
-    driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/main/div/div/div/div[1]/nav/ul/li[3]/a').click()
+    driver.find_element_by_xpath("//a[text()='Faucet']").click()
     time.sleep(3)
-    driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/main/div/div/div/div[2]/div/div/button').click()
+    driver.find_element_by_xpath("//button[text()='Request Funds from Faucet']").click()
     time.sleep(20)
     driver.find_element_by_xpath("//button[text()=' OK ']").click()
 
     # Deposit
     time.sleep(5)
-    driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/main/div/div/div/div[1]/nav/ul/li[1]/a').click()
+    driver.find_element_by_xpath("//a[text()='Deposit']").click()
     time.sleep(10)
     inputs = driver.find_elements_by_xpath('//input')
     inputs[0].send_keys('0.01')
@@ -49,9 +49,9 @@ def runTest(filename, addr):
 
     # Withdraw
     time.sleep(5)
-    driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/main/div/div/div/div[1]/nav/ul/li[2]/a').click()
+    driver.find_element_by_xpath("//a[text()='Withdraw']").click()
     time.sleep(15)
-    driver.find_element_by_xpath('//*[@id="headlessui-listbox-button-14"]').click()
+    driver.find_element_by_xpath("//p[text()='ETH']").click()
     time.sleep(3)
     driver.find_element_by_xpath("//p[text()='USDC']").click()
     time.sleep(5)
