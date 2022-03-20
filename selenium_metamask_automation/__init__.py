@@ -125,6 +125,8 @@ def addAndChangeNetwork():
     driver.execute_script("window.open();")
     driver.switch_to.window(driver.window_handles[1])
     driver.get('chrome-extension://{}/home.html'.format(EXTENSION_ID))
+    time.sleep(3)
+    driver.refresh()
     time.sleep(8)
     driver.find_element_by_xpath("//button[text()='批准']").click()
     time.sleep(3)
@@ -261,7 +263,6 @@ def addToken(tokenAddress):
 
 
 def signConfirm():
-    print("sign")
     time.sleep(3)
 
     driver.execute_script("window.open('');")

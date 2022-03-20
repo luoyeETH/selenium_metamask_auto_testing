@@ -66,7 +66,7 @@ def runTest(filename, addr):
     driver.find_element_by_xpath("//p[text()='LINK']").click()
     time.sleep(5)
     driver.find_element_by_xpath("//button[text()='Withdraw']").click()
-    time.sleep(10)
+    time.sleep(15)
     auto.addAndChangeNetwork()
     time.sleep(3)
     auto.signConfirm()
@@ -88,6 +88,8 @@ def runTest(filename, addr):
     inputs[1].send_keys('5')
     time.sleep(3)
     driver.find_element_by_xpath("//button[text()='Transfer']").click()
+    time.sleep(3)
+    auto.signConfirm()
     print('Transfer Success')
 
     # 退出
