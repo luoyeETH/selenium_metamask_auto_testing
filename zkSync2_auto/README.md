@@ -114,6 +114,6 @@ A:我也没有
 Q:循环执行过程中有成功也有失败
 A:受网速及测试网区块出块速度影响，可能会有偶现失败。如果遇到某问题必然出现，可以提issue反馈。
 ```
-###其它
+### 其它  
 联系方式：luoyeeth@gmail.com  
 演示视频：[zkSync2.0](https://www.bilibili.com/video/BV13i4y1C79m) [muteSwitch](https://www.bilibili.com/video/BV1Sr4y1B7VV)
