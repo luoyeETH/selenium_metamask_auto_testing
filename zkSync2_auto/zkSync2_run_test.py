@@ -33,6 +33,7 @@ def runTest(filename, addr):
     driver.find_element_by_xpath("//button[text()='Request Funds from Faucet']").click()
     time.sleep(20)
     driver.find_element_by_xpath("//button[text()=' OK ']").click()
+    print('Faucet Success')
 
     # Deposit
     time.sleep(5)
@@ -45,7 +46,8 @@ def runTest(filename, addr):
     time.sleep(15)
     # 确认交易
     auto.confirmApprovalFromMetamask()
-    time.sleep(15)
+    time.sleep(10)
+    print('Deposit Success')
 
     # Withdraw
     time.sleep(5)
@@ -68,10 +70,28 @@ def runTest(filename, addr):
     auto.addAndChangeNetwork()
     time.sleep(3)
     auto.signConfirm()
-    time.sleep(15)
-    driver.find_element_by_xpath("//button[text()='Back to Balances']").click()
+    time.sleep(5)
+    print('Withdraw Success')
+
+    # Transfer
+    driver.find_element_by_xpath("//a[text()=' Wallet']").click()
+    time.sleep(3)
+    driver.find_element_by_xpath("//a[text()='Transfer']").click()
+    time.sleep(3)
+    inputs = driver.find_elements_by_xpath('//input')
+    inputs[0].send_keys('0x7A9E49DAcFb35977762B9259DF1dC8880471f898')
+    time.sleep(3)
+    driver.find_element_by_xpath("//p[1]").click()
+    time.sleep(1)
+    driver.find_element_by_xpath("//p[text()='USDC']").click()
+    time.sleep(1)
+    inputs[1].send_keys('5')
+    time.sleep(3)
+    driver.find_element_by_xpath("//button[text()='Transfer']").click()
+    print('Transfer Success')
+
     # 退出
-    time.sleep(10)
+    time.sleep(5)
     driver.get_screenshot_as_file('/Users/luoye/Downloads/TestNetwork/zkSync2/' + address + '.png')
     driver.quit()
 
