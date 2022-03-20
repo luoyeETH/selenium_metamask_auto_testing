@@ -5,6 +5,11 @@ import random
 from selenium.common.exceptions import NoSuchElementException
 
 
+# 动态时间，使用在受网速/区块确认速度影响的sleep中
+dynamic_time = 10
+long_dynamic_time = 45
+
+
 def runMuteSwitchTestnet(filename, addr):
     # 指定chromedriver路径
     driver_path = '/Users/luoye/Downloads/tools/chromedriver'
@@ -63,17 +68,17 @@ def runMuteSwitchTestnet(filename, addr):
                 print("Swap")
                 driver.find_element_by_xpath('//button[text()="Swap"]').click()
                 auto.signConfirm()
-                time.sleep(3)
+                time.sleep(dynamic_time)
                 closePopup()
                 break
             else:
                 print("Approve")
                 driver.find_element_by_xpath('//button[text()="Approve"]').click()
                 auto.signConfirm()
-                time.sleep(8)
+                time.sleep(dynamic_time)
                 # driver.find_element_by_xpath('//button[text()="Swap"]').click()
                 auto.signConfirm()
-                time.sleep(8)
+                time.sleep(dynamic_time)
                 closePopup()
                 break
         print('run swap success')
@@ -102,9 +107,9 @@ def runMuteSwitchTestnet(filename, addr):
         driver.find_element_by_xpath('//button[text()="Supply"]').click()
         time.sleep(3)
         auto.signConfirm()
-        time.sleep(15)
+        time.sleep(dynamic_time)
         auto.signConfirm()
-        time.sleep(10)
+        time.sleep(dynamic_time)
         closePopup()
         print('run add LP success')
 
@@ -127,7 +132,7 @@ def runMuteSwitchTestnet(filename, addr):
                 print("Approve")
                 driver.find_element_by_xpath("//button[text()='Approve']").click()
                 auto.signConfirm()
-                time.sleep(45)
+                time.sleep(long_dynamic_time)
                 # 刷新页面也不显示Deposit 只能等
                 # 等也不一定显示 已向muteSwitch反馈该问题
                 # driver.refresh()
@@ -139,7 +144,7 @@ def runMuteSwitchTestnet(filename, addr):
                 driver.find_element_by_xpath('//button[text()="Deposit"]').click()
                 time.sleep(3)
                 auto.signConfirm()
-                time.sleep(3)
+                time.sleep(dynamic_time)
                 auto.signConfirm()
                 time.sleep(3)
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()

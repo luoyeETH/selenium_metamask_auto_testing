@@ -28,6 +28,15 @@ def launchSeleniumWebdriver(driverPath):
     return driver
 
 
+def checkHandles():
+    handles_value = driver.window_handles
+    if len(handles_value) > 1:
+        driver.switch_to.window(driver.window_handles[1])
+        driver.close()
+        driver.switch_to.window(driver.window_handles[0])
+        checkHandles()
+
+
 def metamaskSetup(recoveryPhrase, password):
     driver.switch_to.window(driver.window_handles[0])
 
@@ -123,6 +132,7 @@ def addAndChangeNetwork():
     time.sleep(3)
     print("添加并切换网络开始")
     driver.execute_script("window.open();")
+    time.sleep(3)
     driver.switch_to.window(driver.window_handles[1])
     driver.get('chrome-extension://{}/home.html'.format(EXTENSION_ID))
     time.sleep(3)
@@ -264,6 +274,8 @@ def addToken(tokenAddress):
 
 def signConfirm():
     time.sleep(3)
+    checkHandles()
+    time.sleep(1)
 
     driver.execute_script("window.open('');")
     driver.switch_to.window(driver.window_handles[1])
@@ -277,13 +289,14 @@ def signConfirm():
             element = driver.find_element_by_xpath('//*[@id="app-content"]/div/div[2]/div/div[3]/div[1]')
         except NoSuchElementException:
             time.sleep(1)
+            print('签名了，但没有完全签名')
             break
         else:
             driver.find_element_by_xpath('//*[@id="app-content"]/div/div[2]/div/div[3]/div[1]').click()
             driver.find_element_by_xpath('//button[text()="签名"]').click()
             time.sleep(1)
+            print('签名完成')
             break
-    print('Sign confirmed')
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
     time.sleep(3)
