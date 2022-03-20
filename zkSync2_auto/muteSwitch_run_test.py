@@ -70,12 +70,10 @@ def runMuteSwitchTestnet(filename, addr):
                 print("Approve")
                 driver.find_element_by_xpath('//button[text()="Approve"]').click()
                 auto.signConfirm()
-                time.sleep(3)
-                closePopup()
-                time.sleep(5)
+                time.sleep(8)
                 # driver.find_element_by_xpath('//button[text()="Swap"]').click()
                 auto.signConfirm()
-                time.sleep(3)
+                time.sleep(8)
                 closePopup()
                 break
         print('run swap success')
@@ -106,6 +104,7 @@ def runMuteSwitchTestnet(filename, addr):
         auto.signConfirm()
         time.sleep(15)
         auto.signConfirm()
+        time.sleep(10)
         closePopup()
         print('run add LP success')
 
@@ -114,12 +113,11 @@ def runMuteSwitchTestnet(filename, addr):
         driver.find_element_by_xpath("//a[text()='Farming']").click()
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="app"]/main/div/div[3]/div/div/div[1]').click()
-        driver.find_element_by_xpath("//button[text()='Approve']").click()
+        time.sleep(3)
         while True:
             try:
                 element = driver.find_element_by_xpath("//button[text()='Approve']")
             except NoSuchElementException:
-                print("Swap")
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()
                 time.sleep(3)
                 driver.get_screenshot_as_file(
@@ -129,13 +127,15 @@ def runMuteSwitchTestnet(filename, addr):
                 print("Approve")
                 driver.find_element_by_xpath("//button[text()='Approve']").click()
                 auto.signConfirm()
-                time.sleep(5)
-                driver.refresh()
-                time.sleep(5)
-                driver.find_element_by_xpath('//*[@id="app"]/main/div/div[3]/div/div/div[1]').click()
-                time.sleep(5)
+                time.sleep(45)
+                # 刷新页面也不显示Deposit 只能等
+                # 等也不一定显示 已向muteSwitch反馈该问题
+                # driver.refresh()
+                # time.sleep(15)
+                # driver.find_element_by_xpath('//*[@id="app"]/main/div/div[3]/div/div/div[1]').click()
+                # time.sleep(5)
                 driver.find_element_by_xpath('//button[text()="MAX"]').click()
-                time.sleep(10)
+                time.sleep(5)
                 driver.find_element_by_xpath('//button[text()="Deposit"]').click()
                 time.sleep(3)
                 auto.signConfirm()
