@@ -3,6 +3,7 @@ import time
 import wallet
 import random
 from selenium.common.exceptions import NoSuchElementException
+from config import global_config
 
 
 # 动态时间，使用在受网速/区块确认速度影响的sleep中
@@ -10,14 +11,14 @@ dynamic_time = 10
 long_dynamic_time = 45
 
 
-def runMuteSwitchTestnet(filename, addr):
+def runMuteSwitchTestnet(addr):
     # 指定chromedriver路径
-    driver_path = '/Users/luoye/Downloads/tools/chromedriver'
+    driver_path = global_config.get('path', 'driver_path').strip()
     driver = auto.launchSeleniumWebdriver(driver_path)
 
     def init():
         address = addr
-        seed_phrase = wallet.getSeedPhrase(filename, address)
+        seed_phrase = wallet.getSeedPhraseV2(address)
         password = 'TestPassword'
         # 导入助记词
         auto.metamaskSetup(seed_phrase, password)
@@ -125,8 +126,8 @@ def runMuteSwitchTestnet(filename, addr):
             except NoSuchElementException:
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()
                 time.sleep(3)
-                driver.get_screenshot_as_file(
-                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch' + addr + '.png')
+                screenshot_path = global_config.get('path', 'result_path').strip()
+                driver.get_screenshot_as_file(str(screenshot_path) + addr + '.png')
                 break
             else:
                 print("Approve")
@@ -149,8 +150,8 @@ def runMuteSwitchTestnet(filename, addr):
                 time.sleep(3)
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()
                 time.sleep(3)
-                driver.get_screenshot_as_file(
-                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/' + addr + '.png')
+                screenshot_path = global_config.get('path', 'result_path').strip()
+                driver.get_screenshot_as_file(str(screenshot_path) + addr + '.png')
                 break
 
     init()

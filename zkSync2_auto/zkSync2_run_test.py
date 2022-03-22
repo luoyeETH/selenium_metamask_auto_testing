@@ -2,16 +2,17 @@ import selenium_metamask_automation as auto
 import time
 import wallet
 import random
+from config import global_config
 
 
-def runTest(filename, addr):
+def runTest(addr):
     # 指定chromedriver路径
-    driver_path = '/Users/luoye/Downloads/tools/chromedriver'
+    driver_path = global_config.get('path', 'driver_path').strip()
     driver = auto.launchSeleniumWebdriver(driver_path)
     # 打开zkSync2.0测试网
     driver.get('https://portal.zksync.io/')
     address = addr
-    seed_phrase = wallet.getSeedPhrase(filename, address)
+    seed_phrase = wallet.getSeedPhraseV2(address)
     password = 'TestPassword'
     # 导入助记词
     auto.metamaskSetup(seed_phrase, password)
@@ -79,7 +80,8 @@ def runTest(filename, addr):
     driver.find_element_by_xpath("//a[text()='Transfer']").click()
     time.sleep(3)
     inputs = driver.find_elements_by_xpath('//input')
-    inputs[0].send_keys('0x7A9E49DAcFb35977762B9259DF1dC8880471f898')
+    transfer_addr = global_config.get('config', 'transfer_address').strip()
+    inputs[0].send_keys(transfer_addr)
     time.sleep(3)
     driver.find_element_by_xpath("//p[1]").click()
     time.sleep(1)
@@ -94,7 +96,8 @@ def runTest(filename, addr):
 
     # 退出
     time.sleep(5)
-    driver.get_screenshot_as_file('/Users/luoye/Downloads/TestNetwork/zkSync2/' + address + '.png')
+    screenshot_path = global_config.get('path', 'result_path').strip()
+    driver.get_screenshot_as_file(str(screenshot_path) + address + '.png')
     driver.quit()
 
 
