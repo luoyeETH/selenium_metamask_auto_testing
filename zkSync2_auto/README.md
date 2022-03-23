@@ -39,7 +39,7 @@ pip install configparser
 ### Python集成开发环境
 推荐使用 [Pycharm](https://www.jetbrains.com/pycharm/)  
 
-##开始使用
+##开始使用  
 
 ### **1.配置chromedriver驱动、excel、运行结果路径**  
 参考`config.ini`中的注释完成相关配置  
