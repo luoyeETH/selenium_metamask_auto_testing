@@ -1,3 +1,10 @@
+# selenium_metamask_auto_testing  
+
+[![version](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/download/releases/3.6.0/) 
+[![status](https://img.shields.io/badge/status-stable-green.svg)](https://github.com/luoyeETH/selenium_metamask_auto_testing)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![star, issue](https://img.shields.io/badge/star%2C%20issue-welcome-brightgreen.svg)](https://github.com/luoyeETH/selenium_metamask_auto_testing)
+
 ## 项目简介
 使用selenium实现对测试网项目的自动化测试
 
