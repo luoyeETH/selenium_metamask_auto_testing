@@ -14,6 +14,7 @@ for i in range(1, 101):
     try:
         zkSync.runTest(address)
         time.sleep(3)
+        # muteSwitch可能存在一系列未知问题
         muteSwitch.runMuteSwitchTestnet(address)
         time.sleep(3)
     except Exception as e:

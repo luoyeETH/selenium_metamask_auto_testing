@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import os
 import urllib.request
 from selenium.common.exceptions import NoSuchElementException
+from config import global_config
 
 EXTENSION_PATH = os.path.abspath(r"..") + '/selenium_metamask_automation/extension_metamask.crx'
 
@@ -23,7 +24,7 @@ def launchSeleniumWebdriver(driverPath):
     chrome_options.add_extension(EXTENSION_PATH)
     global driver
     driver = webdriver.Chrome(options=chrome_options, executable_path=driverPath)
-    time.sleep(5)
+    # time.sleep(5)
     print("Extension has been loaded")
     return driver
 
@@ -44,7 +45,7 @@ def metamaskSetup(recoveryPhrase, password):
     driver.find_element_by_xpath('//button[text()="导入钱包"]').click()
     driver.find_element_by_xpath('//button[text()="我同意"]').click()
 
-    time.sleep(5)
+    # time.sleep(5)
 
     inputs = driver.find_elements_by_xpath('//input')
     inputs[0].send_keys(recoveryPhrase)
@@ -53,10 +54,10 @@ def metamaskSetup(recoveryPhrase, password):
     driver.find_element_by_css_selector('.first-time-flow__terms').click()
     driver.find_element_by_xpath('//button[text()="导入"]').click()
 
-    time.sleep(8)
+    # time.sleep(8)
 
     driver.find_element_by_xpath('//button[text()="全部完成"]').click()
-    time.sleep(2)
+    # time.sleep(2)
 
     # # closing the message popup after all done metamask screen
     # driver.find_element_by_xpath('//*[@id="popover-content"]/div/div/section/header/div/button').click()
@@ -73,35 +74,18 @@ def changeMetamaskNetwork(networkName):
     driver.execute_script("window.open();")
     driver.switch_to.window(driver.window_handles[1])
     driver.get('chrome-extension://{}/home.html'.format(EXTENSION_ID))
-    time.sleep(5)
-    try:
-        element = driver.find_element_by_xpath('//*[@id="popover-content"]/div/div/section/header/div/button')
-    except NoSuchElementException as e:
-        # 打印异常信息
-        print(e)
-        print("no popup")
-        # 发生了NoSuchElementException异常，说明页面中未找到该元素，返回False
-    else:
-        # 没有发生异常，表示在页面中找到了该元素，返回True
-        driver.find_element_by_xpath('//*[@id="popover-content"]/div/div/section/header/div/button').click()
-        print("closing popup")
-    # driver.find_element_by_xpath('//*[@id="popover-content"]/div/div/section/header/div/button').click()
+    driver.find_element_by_xpath('//*[@id="popover-content"]/div/div/section/header/div/button').click()
     # 打开网络下拉框
     driver.find_element_by_xpath('//*[@id="app-content"]/div/div[1]/div/div[2]/div[1]/div/span').click()
     # 跳转开启测试网设置
     driver.find_element_by_xpath('//*[@id="app-content"]/div/div[2]/div/div[1]/div[3]/span/a').click()
-    time.sleep(2)
     # 显示测试网
     driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[2]/div[2]/div[2]/div[7]/div[2]/div/div/div[1]/div[2]/div').click()
-    time.sleep(2)
     # 滑到最上方
     driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
-    time.sleep(2)
     # 打开网络下拉框
     driver.find_element_by_xpath('//*[@id="app-content"]/div/div[1]/div/div[2]/div[1]/div/span').click()
-    time.sleep(2)
     print("opening network dropdown")
-    # elem = driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div')
     time.sleep(2)
     # 以太坊 Ethereum 主网络
     # Ropsten 测试网络
@@ -110,18 +94,14 @@ def changeMetamaskNetwork(networkName):
     # Goerli 测试网络
     all_li = driver.find_elements_by_tag_name('li')
 
-    time.sleep(2)
     for li in all_li:
         text = li.text
         if text == networkName:
             li.click()
             print(text, "is selected")
-            time.sleep(2)
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
-            time.sleep(3)
             return
-    time.sleep(2)
     print("Please provide a valid network name")
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
@@ -129,64 +109,48 @@ def changeMetamaskNetwork(networkName):
 
 
 def addAndChangeNetwork():
-    time.sleep(3)
+    time.sleep(5)
     print("添加并切换网络开始")
     driver.execute_script("window.open();")
-    time.sleep(3)
     driver.switch_to.window(driver.window_handles[1])
     driver.get('chrome-extension://{}/home.html'.format(EXTENSION_ID))
-    time.sleep(3)
-    driver.refresh()
-    time.sleep(8)
+    # driver.refresh()
     driver.find_element_by_xpath("//button[text()='批准']").click()
-    time.sleep(3)
     driver.find_element_by_xpath("//button[text()='切换网络']").click()
-    time.sleep(8)
+    time.sleep(3)
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
-    time.sleep(3)
 
 
 def connectToWebsite():
-    time.sleep(3)
+    time.sleep(5)
 
     driver.execute_script("window.open('');")
     driver.switch_to.window(driver.window_handles[1])
 
     driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
-    time.sleep(5)
     driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
     time.sleep(3)
-    # driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[2]/div[4]/div[2]/button[2]').click()
     driver.find_element_by_xpath('//button[text()="下一步"]').click()
-    time.sleep(1)
-    # driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[2]/div[2]/div[2]/footer/button[2]').click()
     driver.find_element_by_xpath('//button[text()="连接"]').click()
-    time.sleep(3)
     print('Site connected to metamask')
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
-    time.sleep(3)
 
 
 def confirmApprovalFromMetamask():
+    time.sleep(5)
     driver.execute_script("window.open('');")
     driver.switch_to.window(driver.window_handles[1])
 
     driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
-    time.sleep(10)
     driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
-    time.sleep(10)
-    # confirm approval from metamask
-    # driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[4]/footer/button[2]').click()
     driver.find_element_by_xpath('//button[text()="确认"]').click()
-    time.sleep(12)
     print("Approval transaction confirmed")
 
     driver.close()
     # switch back
     driver.switch_to.window(driver.window_handles[0])
-    time.sleep(3)
 
 
 def rejectApprovalFromMetamask():
@@ -194,9 +158,9 @@ def rejectApprovalFromMetamask():
     driver.switch_to.window(driver.window_handles[1])
 
     driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
-    time.sleep(10)
+    # time.sleep(10)
     driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
-    time.sleep(10)
+    # time.sleep(10)
     # confirm approval from metamask
     driver.find_element_by_xpath('//*[@id="app-content"]/div/div[3]/div/div[4]/footer/button[1]').click()
     time.sleep(8)
@@ -273,7 +237,7 @@ def addToken(tokenAddress):
 
 
 def signConfirm():
-    time.sleep(3)
+    time.sleep(5)
     checkHandles()
     time.sleep(1)
 
@@ -281,7 +245,6 @@ def signConfirm():
     driver.switch_to.window(driver.window_handles[1])
 
     driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
-    time.sleep(5)
     driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
     time.sleep(5)
     while True:
@@ -299,7 +262,6 @@ def signConfirm():
             break
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
-    time.sleep(3)
 
 
 def signReject():
