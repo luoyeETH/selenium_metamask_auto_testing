@@ -17,6 +17,11 @@ pip install selenium
 pip install openpyxl
 ```
 
+### configparser库
+```bash
+pip install configparser
+```
+
 ### Chrome浏览器和Chromedriver驱动  
 [下载安装谷歌浏览器](https://www.google.cn/chrome/)  
 [Chrome 浏览器驱动下载地址](https://chromedriver.storage.googleapis.com/index.html)
@@ -35,6 +40,7 @@ pip install openpyxl
 推荐使用 [Pycharm](https://www.jetbrains.com/pycharm/)  
 
 ##开始使用
+
 ### **1.配置chromedriver驱动、excel、运行结果路径**  
 参考`config.ini`中的注释完成相关配置  
 
