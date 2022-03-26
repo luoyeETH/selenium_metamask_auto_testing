@@ -45,7 +45,7 @@ def metamaskSetup(recoveryPhrase, password):
     driver.find_element_by_xpath('//button[text()="导入钱包"]').click()
     driver.find_element_by_xpath('//button[text()="我同意"]').click()
 
-    # time.sleep(5)
+    time.sleep(3)
 
     inputs = driver.find_elements_by_xpath('//input')
     inputs[0].send_keys(recoveryPhrase)
