@@ -122,6 +122,53 @@ def addAndChangeNetwork():
     driver.switch_to.window(driver.window_handles[0])
 
 
+def changeNetworkByChainList(network_name):
+    """
+    通过Chainlist.org切换指定网络
+
+    :Args:
+        - network_name: string 完整的网络名.
+
+    :Usage:
+        auto.changeNetworkByChainList('Binance Smart Chain Mainnet')
+    """
+    time.sleep(5)
+    print("切换指定网络开始")
+    driver.execute_script("window.open();")
+    driver.switch_to.window(driver.window_handles[1])
+    driver.get('https://chainlist.org/')
+    driver.find_element_by_xpath("//h5[text()='Connect Wallet']").click()
+    # connect chainlist
+    driver.execute_script("window.open('');")
+    driver.switch_to.window(driver.window_handles[2])
+    driver.get('chrome-extension://{}/popup.html'.format(EXTENSION_ID))
+    driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")
+    time.sleep(3)
+    driver.find_element_by_xpath('//button[text()="下一步"]').click()
+    driver.find_element_by_xpath('//button[text()="连接"]').click()
+    driver.close()
+    driver.switch_to.window(driver.window_handles[1])
+    # search Network
+    driver.find_element_by_xpath("//span[text()='Testnets']").click()
+    time.sleep(1)
+    inputs = driver.find_elements_by_xpath('//input')
+    inputs[0].send_keys(network_name)
+    time.sleep(1)
+    driver.find_element_by_xpath("//span[text()='Add to Metamask']").click()
+    # change Network
+    time.sleep(3)
+    driver.execute_script("window.open();")
+    driver.switch_to.window(driver.window_handles[2])
+    driver.get('chrome-extension://{}/home.html'.format(EXTENSION_ID))
+    driver.find_element_by_xpath("//button[text()='批准']").click()
+    driver.find_element_by_xpath("//button[text()='切换网络']").click()
+    time.sleep(3)
+    driver.close()
+    driver.switch_to.window(driver.window_handles[1])
+    driver.close()
+    driver.switch_to.window(driver.window_handles[0])
+
+
 def connectToWebsite():
     time.sleep(5)
 
