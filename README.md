@@ -17,7 +17,7 @@
   * 初始提交。
 
 ## 现已支持
-  `zkSync2.0 | muteSwitch` [>查看详情<](https://github.com/luoyeETH/selenium_metamask_auto_testing/tree/main/zkSync2_auto)  
+  `zkSync2.0 | muteSwitch` [>查看详情<](https://github.com/luoyeETH/selenium_metamask_auto_testing/tree/main/zkSync2_auto)(可能已失效)  
 
 ## 感谢
 感谢 [selenium_metamask_automation](https://github.com/javerianadeem/selenium_metamask_automation) 项目提供了对MetaMask插件的操作参考。  
